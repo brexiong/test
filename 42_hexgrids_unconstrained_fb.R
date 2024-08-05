@@ -64,7 +64,7 @@ clean_data <- function(data){
   data_layer <- data %>%
     # reproject the same coordinate reference system (crs) as the study area
     sf::st_transform("ESRI:102008") %>% # EPSG WKID 102008 (https://epsg.io/102008)
-    # filter for only active aquatic farm permits
+    # filter for only NA values in the field 'constraints', as those are the unconstrained values
     dplyr::filter(is.na(constraints)) %>%
   return(data_layer)
 }
