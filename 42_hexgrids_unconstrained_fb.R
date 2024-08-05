@@ -74,16 +74,16 @@ clean_data <- function(data){
 for(i in 1:length(code_dict$study_area)){
   
   # floating bag
-  file = file.path(study_area_dir, code_dict$study_area[[i]], "2_floating_bag/d_suitability_data/constraints/1_constraints.gpkg")
+  file = file.path(study_area_dir, code_dict$study_area[i], "2_floating_bag/d_suitability_data/constraints/1_constraints.gpkg")
   
   # layer 
-  layer = paste(code_dict$code[[i]], "cs_fb_suitability", sep = "_")
+  data_layer = paste(code_dict$code[i], "cs_fb_suitability", sep = "_")
   
   # Read the layer from the input GeoPackage
-  data <- sf::st_read(dsn = file, layer = layer) %>% clean_data
+  data <- sf::st_read(dsn = file, layer = data_layer) %>% clean_data
 
   # New layer name for output
-  new_layer_name = paste(layer, "unconstrained", sep = "_")
+  new_layer_name = paste(data_layer, "unconstrained", sep = "_")
 
   # Write the layer to the output GeoPackage
   sf::st_write(obj = data, dsn = file, layer = new_layer_name, append = FALSE)
